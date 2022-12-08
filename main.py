@@ -59,7 +59,7 @@ class Main:
                             file_types=(("画像ファイル", ".png"), ("画像ファイル", ".jpg"), ("画像ファイル", ".jpeg"))),
              gui.Button(button_text="画像保存", key="saveFig")],
             [gui.Text(text="ガンマ値"),
-             gui.Slider(range=(0.0, 10.0), resolution=.05, default_value=1.0, size=(40, 15),
+             gui.Slider(range=(0.0, 10.0), resolution=.01, default_value=1.0, size=(40, 15),
                         orientation="h", key="gamma")],
 
             [gui.Checkbox(text="開発者モード", default=False, key="devMode"),
@@ -100,10 +100,6 @@ class Main:
         look_up_table = np.empty((1, 256), np.uint8)
         for i in range(256):
             look_up_table[0, i] = np.clip(pow(i / 255.0, self.value["gamma"]) * 255.0, 0, 255)
-        image = cv.LUT(image, look_up_table)
-        look_up_table = np.empty((1, 256), np.uint8)
-        for i in range(256):
-            look_up_table[0, i] = np.clip(pow(i / 255.0, self.value["devGamma"]) * 255.0, 0, 255)
         image = cv.LUT(image, look_up_table)
 
         cv.imwrite(f"resources/{basename(self.value['fileText'])}_{time()}.png", image)
