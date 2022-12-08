@@ -1,0 +1,11 @@
+*.jpg
+*.jpeg
+*.png
+*.ico
+*.zip
+main.spec
+/venv/
+/.idea/
+/build/
+/dist/
+/macos/

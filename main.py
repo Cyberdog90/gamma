@@ -39,12 +39,9 @@ class Main:
                     self.cfg.write(f)
 
             if self.event == "saveFig":
-                print("hoge")
                 self.save()
 
             self.dev_mode_switch()
-            # self.dev_slider()
-            # self.slider()
             if self.value["fileText"] != self.file_name:
                 self.original = self.image = cv.imread(self.value["fileText"])
                 self.image = cv.resize(self.image, dsize=(256, 256))
@@ -64,31 +61,13 @@ class Main:
             [gui.Text(text="ガンマ値"),
              gui.Slider(range=(0.0, 10.0), resolution=.05, default_value=1.0, size=(40, 15),
                         orientation="h", key="gamma")],
-            [gui.Text(text="シャドー", visible=False),
-             gui.Slider(range=(0, 255), default_value=0, size=(40, 15), orientation="h",
-                        key="shadow", visible=False)],
-            [gui.Text(text="中間調", visible=False),
-             gui.Slider(range=(0, 255), default_value=127, size=(40, 15), orientation="h",
-                        key="half", visible=False)],
-            [gui.Text(text="ハイライト", visible=False),
-             gui.Slider(range=(0, 255), default_value=255, size=(40, 15), orientation="h",
-                        key="highlight", visible=False)],
 
             [gui.Checkbox(text="開発者モード", default=False, key="devMode"),
              gui.Button(button_text="セーブ", disabled=True, key="devSave"),
              gui.Button(button_text="ロード", disabled=True, key="devLoad")],
             [gui.Text(text="ガンマ値"),
              gui.Slider(range=(0.0, 10.0), resolution=.05, default_value=self.gamma, disabled=True, size=(40, 15),
-                        orientation="h", key="devGamma")],
-            [gui.Text(text="シャドー", visible=False),
-             gui.Slider(range=(0, 255), default_value=0, disabled=True, size=(40, 15), orientation="h",
-                        key="devShadow", visible=False)],
-            [gui.Text(text="中間調", visible=False),
-             gui.Slider(range=(0, 255), default_value=127, disabled=True, size=(40, 15), orientation="h",
-                        key="devHalf", visible=False)],
-            [gui.Text(text="ハイライト", visible=False),
-             gui.Slider(range=(0, 255), default_value=255, disabled=True, size=(40, 15), orientation="h",
-                        key="devHighlight", visible=False)]
+                        orientation="h", key="devGamma")]
         ]
 
     def processing(self):
@@ -111,33 +90,10 @@ class Main:
             self.window["devSave"].update(disabled=False)
             self.window["devLoad"].update(disabled=False)
             self.window["devGamma"].update(disabled=False)
-            self.window["devShadow"].update(disabled=False)
-            self.window["devHalf"].update(disabled=False)
-            self.window["devHighlight"].update(disabled=False)
         else:
             self.window["devSave"].update(disabled=True)
             self.window["devLoad"].update(disabled=True)
             self.window["devGamma"].update(disabled=True)
-            self.window["devShadow"].update(disabled=True)
-            self.window["devHalf"].update(disabled=True)
-            self.window["devHighlight"].update(disabled=True)
-
-    def dev_slider(self):
-        if self.value["devMode"]:
-            if self.value["devShadow"] > self.value["devHighlight"]:
-                self.window["devShadow"].update(self.value["devHighlight"])
-            if self.value["devHalf"] > self.value["devHighlight"]:
-                self.window["devHalf"].update(self.value["devHighlight"])
-            if self.value["devHalf"] < self.value["devShadow"]:
-                self.window["devHalf"].update(self.value["devShadow"])
-
-    def slider(self):
-        if self.value["shadow"] > self.value["highlight"]:
-            self.window["shadow"].update(self.value["highlight"])
-        if self.value["half"] > self.value["highlight"]:
-            self.window["half"].update(self.value["highlight"])
-        if self.value["half"] < self.value["shadow"]:
-            self.window["half"].update(self.value["shadow"])
 
     def save(self):
         image = cv.cvtColor(self.original, cv.COLOR_BGR2GRAY)
