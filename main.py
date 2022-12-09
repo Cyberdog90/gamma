@@ -96,7 +96,7 @@ class Main:
             self.window["devGamma"].update(disabled=True)
 
     def save(self):
-        image = cv.cvtColor(self.original, cv.COLOR_BGR2GRAY)
+        image = self.original
         look_up_table = np.empty((1, 256), np.uint8)
         for i in range(256):
             look_up_table[0, i] = np.clip(pow(i / 255.0, self.value["gamma"]) * 255.0, 0, 255)
