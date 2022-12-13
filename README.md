@@ -1,5 +1,5 @@
 # ガンマ補正するやつ
-※[Windows版](https://github.com/Cyberdog90/gamma/releases/tag/1.3)はバイナリがあります
+※[Windows版](https://github.com/Cyberdog90/gamma/releases/tag/1.3)は実行ファイルがあります
 ## おそらく動作する環境
 - Python3 (新しい方が良い)
 
