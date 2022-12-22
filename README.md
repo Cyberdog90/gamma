@@ -4,5 +4,5 @@
 - Python3 (新しい方が良い)
 
 ## 依存パッケージ
-- [opencv-python](pypi.org/project/opencv-python/4.5.5.64/)
+- [opencv-python](https://pypi.org/project/opencv-python/4.5.5.64/)
 - [PySimpleGUI](https://pypi.org/project/PySimpleGUI/)
